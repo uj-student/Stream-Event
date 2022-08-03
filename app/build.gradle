@@ -53,6 +53,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$http_logging_version"
     implementation "com.google.code.gson:gson:$gson_version"
 
+    implementation 'com.google.android.material:material:1.7.0-alpha03'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
