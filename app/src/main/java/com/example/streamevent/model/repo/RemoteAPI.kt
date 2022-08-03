@@ -1,7 +1,7 @@
 package com.example.streamevent.model.repo
 
-import com.example.streamevent.model.data.Event
-import com.example.streamevent.model.data.Schedule
+import com.example.streamevent.model.dto.Event
+import com.example.streamevent.model.dto.Schedule
 import retrofit2.http.GET
 
 interface RemoteAPI {
