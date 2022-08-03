@@ -35,6 +35,7 @@ class EventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        println(EventFragment::class.java.simpleName)
         return inflater.inflate(R.layout.fragment_event, container, false)
     }
 
