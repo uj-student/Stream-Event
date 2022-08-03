@@ -2,20 +2,17 @@ package com.example.streamevent
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.streamevent.databinding.ActivityMainBinding
 import com.example.streamevent.view.EventFragmentDirections
 import com.example.streamevent.view.ScheduleFragmentDirections
-import com.example.streamevent.viewmodel.EventsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val eventsViewModel: EventsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +42,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-//        eventsViewModel.eventsLiveData.observe(this) { events ->
-//            events.forEach {
-//                println("hello")
-//                println(it.title)
-//            }
-//        }
-
 }
