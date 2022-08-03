@@ -40,10 +40,18 @@ class EventFragment : Fragment() {
             events.let {
                 binding.eventRecyclerView.apply {
                     with(adapter as EventAdapter) {
-                        this.events = events
+                        this.displayItems = events
                         notifyDataSetChanged()
                     }
                 }
+            }
+        }
+    }
+
+    private fun setUpProgressIndicatorObserver() {
+        eventsViewModel.showProgressIndicator.observe(viewLifecycleOwner) {
+            if(it) {
+
             }
         }
     }

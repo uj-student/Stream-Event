@@ -1,6 +1,7 @@
 package com.example.streamevent
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -40,6 +41,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false //Do nothing => Don't attempt navigation - already on screen
             }
+        }
+
+        fun showProgressIndicator() {
+            binding.progressIndicator.visibility = View.VISIBLE
+        }
+
+        fun hideProgressIndicator() {
+            binding.progressIndicator.visibility = View.GONE
         }
     }
 }

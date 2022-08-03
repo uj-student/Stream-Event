@@ -4,4 +4,6 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val remoteAPI: RemoteAPI) {
     suspend fun getEvents() = remoteAPI.getEvents()
+
+    suspend fun getSchedule() = remoteAPI.getSchedule()
 }
