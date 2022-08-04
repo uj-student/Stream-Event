@@ -67,7 +67,6 @@ dependencies {
 
     implementation group: 'com.ibm.icu', name: 'icu4j', version: '53.1'
 
-
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
