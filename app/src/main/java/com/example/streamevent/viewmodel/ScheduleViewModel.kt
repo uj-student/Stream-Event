@@ -15,7 +15,7 @@ class ScheduleViewModel @Inject constructor(private val repository: Repository):
 
     init {
         viewModelScope.launch {
-            scheduleLiveData.postValue(repository.getSchedule())
+            scheduleLiveData.postValue(repository.getSchedule().sortedBy { it.date })
         }
     }
 }
