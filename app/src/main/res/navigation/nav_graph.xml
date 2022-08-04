@@ -27,5 +27,10 @@
     <fragment
         android:id="@+id/playbackFragment"
         android:name="com.example.streamevent.view.PlaybackFragment"
-        tools:layout="@layout/fragment_playback" />
+        tools:layout="@layout/fragment_playback">
+
+        <argument
+            android:name="eventData"
+            app:argType="com.example.streamevent.model.dto.Event" />
+    </fragment>
 </navigation>

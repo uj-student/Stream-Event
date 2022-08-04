@@ -18,11 +18,13 @@ class EventAdapter @Inject constructor() : RecyclerView.Adapter<EventAdapter.Vie
         ViewHolder(EventItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: EventAdapter.ViewHolder, position: Int) {
-        holder.bind(eventDisplayItems[position])
-        holder.itemView.setOnClickListener {
-            if(eventDisplayItems[position].videoUrl.isNotEmpty()) {
-                println("hello")
-                it.findNavController().navigate(EventFragmentDirections.actionEventFragmentToPlaybackFragment())
+        with(eventDisplayItems[position]) {
+            holder.bind(this)
+            holder.itemView.setOnClickListener {
+                if (this.videoUrl.isNotEmpty()) {
+                    println("hello")
+                    it.findNavController().navigate(EventFragmentDirections.actionEventFragmentToPlaybackFragment(this))
+                }
             }
         }
     }
