@@ -39,7 +39,7 @@ class ScheduleFragment : Fragment() {
     private fun setUpScheduleObserver() {
         scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) { schedules ->
             with(binding.scheduleRecyclerView.adapter as EventAdapter) {
-                this.displayItems = schedules.sortedBy { it.date }
+                this.displayItems = schedules
                 notifyDataSetChanged()
             }
         }

@@ -16,7 +16,7 @@ class EventsViewModel @Inject constructor(private val repository: Repository): V
 
     init {
         viewModelScope.launch {
-            eventsLiveData.postValue(repository.getEvents())
+            eventsLiveData.postValue(repository.getEvents().sortedBy { it.date })
             showProgressIndicator.postValue(false)
         }
     }

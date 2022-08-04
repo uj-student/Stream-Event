@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.streamevent.databinding.EventItemBinding
 import com.example.streamevent.model.dto.Schedule
+import com.example.streamevent.util.formatDate
 import com.example.streamevent.util.loadImage
 import javax.inject.Inject
 
@@ -26,7 +27,7 @@ class EventAdapter @Inject constructor() : RecyclerView.Adapter<EventAdapter.Vie
             with(binding) {
                 eventTitle.text = eventItem.title
                 eventSubTitle.text = eventItem.subtitle
-                eventDateTime.text = eventItem.date
+                eventDateTime.text = eventItem.date.formatDate()
                 eventThumbnail.loadImage(eventItem.imageUrl)
             }
         }
