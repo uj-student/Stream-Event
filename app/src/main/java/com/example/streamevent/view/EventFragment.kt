@@ -40,7 +40,7 @@ class EventFragment : Fragment() {
             events.let {
                 binding.eventRecyclerView.apply {
                     with(adapter as EventAdapter) {
-                        this.displayItems = events
+                        this.eventDisplayItems = events
                         notifyDataSetChanged()
                     }
                 }

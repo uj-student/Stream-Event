@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.streamevent.databinding.ActivityMainBinding
@@ -21,11 +22,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-        setUpNavigation(navHostFragment.navController)
-
+        setUpNavigationBehaviour(navHostFragment.navController)
     }
 
-    private fun setUpNavigation(navController: NavController) {
+    private fun setUpNavigationBehaviour(navController: NavController) {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when {
                 (item.itemId == R.id.eventsMenuItem) && (navController.currentDestination?.id != R.id.eventFragment) -> {
@@ -43,12 +43,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun showProgressIndicator() {
-            binding.progressIndicator.visibility = View.VISIBLE
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.eventFragment -> toggleBottomNavigationBarVisibility(true)
+                R.id.scheduleFragment -> toggleBottomNavigationBarVisibility(true)
+                else -> toggleBottomNavigationBarVisibility(false)
+            }
         }
+    }
 
-        fun hideProgressIndicator() {
-            binding.progressIndicator.visibility = View.GONE
-        }
+    fun showProgressIndicator() {
+        binding.progressIndicator.visibility = View.VISIBLE
+    }
+
+    fun hideProgressIndicator() {
+        binding.progressIndicator.visibility = View.GONE
+    }
+
+    private fun toggleBottomNavigationBarVisibility(show: Boolean) {
+        binding.bottomNavigationView.isVisible = show
     }
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.streamevent.databinding.FragmentScheduleBinding
+import com.example.streamevent.model.dto.toEvent
 import com.example.streamevent.view.adapter.EventAdapter
 import com.example.streamevent.viewmodel.ScheduleViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +40,7 @@ class ScheduleFragment : Fragment() {
     private fun setUpScheduleObserver() {
         scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) { schedules ->
             with(binding.scheduleRecyclerView.adapter as EventAdapter) {
-                this.displayItems = schedules
+                this.eventDisplayItems = toEvent(schedules)
                 notifyDataSetChanged()
             }
         }
