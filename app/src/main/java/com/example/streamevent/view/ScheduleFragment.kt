@@ -22,9 +22,13 @@ class ScheduleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setUpUI()
         setUpScheduleObserver()
-        return binding.root
     }
 
     //ToDo: look at duplicate code with EventFragment
@@ -37,12 +41,7 @@ class ScheduleFragment : Fragment() {
         }
     }
 
-    private fun setUpScheduleObserver() {
-        scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) { schedules ->
-            with(binding.scheduleRecyclerView.adapter as EventAdapter) {
-                this.eventDisplayItems = toEvent(schedules)
-                notifyDataSetChanged()
-            }
-        }
+    private fun setUpScheduleObserver() = scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) {
+        (binding.scheduleRecyclerView.adapter as EventAdapter).setEventList(toEvent(it))
     }
 }
