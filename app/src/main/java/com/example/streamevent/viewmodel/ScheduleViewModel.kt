@@ -10,12 +10,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ScheduleViewModel @Inject constructor(private val repository: Repository): ViewModel() {
+class ScheduleViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     val scheduleLiveData = MutableLiveData<List<Schedule>>()
 
-    init {
-        viewModelScope.launch {
+    fun getSchedule() = viewModelScope.launch {
             scheduleLiveData.postValue(repository.getSchedule().sortedBy { it.date })
         }
-    }
 }

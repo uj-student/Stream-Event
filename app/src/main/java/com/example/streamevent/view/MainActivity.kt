@@ -1,15 +1,15 @@
-package com.example.streamevent
+package com.example.streamevent.view
 
 import android.os.Bundle
-import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.streamevent.R
 import com.example.streamevent.databinding.ActivityMainBinding
-import com.example.streamevent.view.EventFragmentDirections
-import com.example.streamevent.view.ScheduleFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         setUpNavigationBehaviour(navHostFragment.navController)
     }
@@ -33,8 +32,7 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(ScheduleFragmentDirections.actionScheduleFragmentToEventFragment())
                     true
                 }
-                (item.itemId == R.id.scheduleMenuItem) && (navController.currentDestination?.id != R.id
-                    .scheduleFragment) -> {
+                (item.itemId == R.id.scheduleMenuItem) && (navController.currentDestination?.id != R.id.scheduleFragment) -> {
                     Toast.makeText(baseContext, "Schedule!!", Toast.LENGTH_LONG).show()
                     navController.navigate(EventFragmentDirections.actionEventFragmentToScheduleFragment())
                     true
@@ -53,11 +51,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showProgressIndicator() {
-        binding.progressIndicator.visibility = View.VISIBLE
+        binding.progressIndicator.visibility = VISIBLE
     }
 
     fun hideProgressIndicator() {
-        binding.progressIndicator.visibility = View.GONE
+        binding.progressIndicator.visibility = GONE
     }
 
     private fun toggleBottomNavigationBarVisibility(show: Boolean) {

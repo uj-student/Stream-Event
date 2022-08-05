@@ -3,6 +3,7 @@ package com.example.streamevent.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.streamevent.databinding.EventItemBinding
 import com.example.streamevent.model.dto.Event
@@ -12,7 +13,7 @@ import com.example.streamevent.view.EventFragmentDirections
 import javax.inject.Inject
 
 class EventAdapter @Inject constructor() : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
-    var eventDisplayItems: List<Event> = listOf()
+    private var eventDisplayItems: List<Event> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(EventItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -22,7 +23,6 @@ class EventAdapter @Inject constructor() : RecyclerView.Adapter<EventAdapter.Vie
             holder.bind(this)
             holder.itemView.setOnClickListener {
                 if (this.videoUrl.isNotEmpty()) {
-                    println("hello")
                     it.findNavController().navigate(EventFragmentDirections.actionEventFragmentToPlaybackFragment(this))
                 }
             }
@@ -31,8 +31,14 @@ class EventAdapter @Inject constructor() : RecyclerView.Adapter<EventAdapter.Vie
 
     override fun getItemCount() = eventDisplayItems.size
 
-    inner class ViewHolder(private val binding: EventItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun setEventList(eventList: List<Event>) {
+        val diffUtil = EventDiffUtil(this.eventDisplayItems, eventList)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
+        this.eventDisplayItems = eventList
+        diffResult.dispatchUpdatesTo(this)
+    }
 
+    inner class ViewHolder(private val binding: EventItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(eventItem: Event) {
             with(binding) {
                 eventTitle.text = eventItem.title

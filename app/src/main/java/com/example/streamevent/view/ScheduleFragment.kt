@@ -1,5 +1,6 @@
 package com.example.streamevent.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,13 +19,24 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ScheduleFragment : Fragment() {
     private lateinit var binding: FragmentScheduleBinding
+    private lateinit var baseActivity: MainActivity
     private val scheduleViewModel: ScheduleViewModel by viewModels()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        baseActivity = requireActivity() as MainActivity
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
-        setUpUI()
-        setUpScheduleObserver()
+        baseActivity.showProgressIndicator()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpUI()
+        getScheduleAndObserver()
     }
 
     //ToDo: look at duplicate code with EventFragment
@@ -37,12 +49,11 @@ class ScheduleFragment : Fragment() {
         }
     }
 
-    private fun setUpScheduleObserver() {
-        scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) { schedules ->
-            with(binding.scheduleRecyclerView.adapter as EventAdapter) {
-                this.eventDisplayItems = toEvent(schedules)
-                notifyDataSetChanged()
-            }
+    private fun getScheduleAndObserver() {
+        scheduleViewModel.getSchedule()
+        scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) {
+            (binding.scheduleRecyclerView.adapter as EventAdapter).setEventList(toEvent(it))
+            baseActivity.hideProgressIndicator()
         }
     }
 }
