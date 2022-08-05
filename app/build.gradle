@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.streamevent"
-        minSdk 23
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.activity:activity-ktx:1.5.1'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -60,6 +59,11 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$http_logging_version"
     implementation 'com.google.code.gson:gson:2.9.0'
 
+    implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayer_version"
+    implementation "com.google.android.exoplayer:exoplayer-smoothstreaming:$exoplayer_version"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayer_version"
+
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
@@ -67,9 +71,6 @@ dependencies {
 
     implementation group: 'com.ibm.icu', name: 'icu4j', version: '53.1'
 
-    implementation "androidx.media3:media3-exoplayer:$media_version"
-    implementation "androidx.media3:media3-ui:$media_version"
-    implementation "androidx.media3:media3-exoplayer-dash:$media_version"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

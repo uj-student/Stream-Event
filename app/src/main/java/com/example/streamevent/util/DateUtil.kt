@@ -13,7 +13,7 @@ private const val dayPattern = "dd"
 private const val timePattern = "kk:mm" //24 hour
 
 fun String.formatDate(): String = with(SimpleDateFormat(datePattern, Locale.getDefault()).parse(this) ?: Date()) {
-    "${getDayName(this)}, ${this.time()} "
+    "${getDayName(this)}, ${this.time()}"
 }
 
 fun Date.getDisplayDate(): String = "${this.day()}.${this.month()}.${this.year()}"
@@ -43,7 +43,7 @@ fun getDayName(date: Date): String {
         date.isToday() -> {
             return "Today"
         }
-        !date.isOneDayDifference() -> {
+        date.isOneDayDifference() -> {
             if (date.isYesterday()) {
                 return "Yesterday"
             }
@@ -52,7 +52,7 @@ fun getDayName(date: Date): String {
             }
         }
     }
-    return if (getNumberOfDays(date) > 5) getDurationTillFunction(date) else date.getDisplayDate()
+    return if (getNumberOfDays(date) < 6) getDurationTillFunction(date) else date.getDisplayDate()
 }
 
 //assumption is day difference is greater than 1
