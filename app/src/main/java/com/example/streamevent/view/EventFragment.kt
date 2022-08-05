@@ -1,5 +1,6 @@
 package com.example.streamevent.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,21 +13,27 @@ import com.example.streamevent.view.adapter.EventAdapter
 import com.example.streamevent.viewmodel.EventsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class EventFragment : Fragment() {
     private lateinit var binding: FragmentEventBinding
+    private lateinit var baseActivity: MainActivity
     private val eventsViewModel: EventsViewModel by viewModels()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        baseActivity = requireActivity() as MainActivity
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentEventBinding.inflate(inflater, container, false)
+        baseActivity.showProgressIndicator()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpUI()
-        setUpEventObserver()
+        getEventsAndObserver()
     }
 
     private fun setUpUI() {
@@ -37,10 +44,11 @@ class EventFragment : Fragment() {
         }
     }
 
-    private fun setUpEventObserver() {
+    private fun getEventsAndObserver() {
+        eventsViewModel.getEvents()
         eventsViewModel.eventsLiveData.observe(viewLifecycleOwner) {
             (binding.eventRecyclerView.adapter as EventAdapter).setEventList(it)
+            baseActivity.hideProgressIndicator()
         }
     }
-
 }

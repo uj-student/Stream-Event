@@ -1,36 +1,33 @@
 package com.example.streamevent.view
 
 import android.os.Bundle
-import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.streamevent.R
 import com.example.streamevent.databinding.ActivityMainBinding
-import com.example.streamevent.viewmodel.BaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val baseViewModel: BaseViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        observeProgressIndicator()
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         setUpNavigationBehaviour(navHostFragment.navController)
     }
 
-    private fun setUpNavigationBehaviour(navController: NavController)  {
+    private fun setUpNavigationBehaviour(navController: NavController) {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            println("hello3: ${binding.progressIndicator.isVisible}")
+
             when {
                 (item.itemId == R.id.eventsMenuItem) && (navController.currentDestination?.id != R.id.eventFragment) -> {
                     Toast.makeText(baseContext, "Events!!", Toast.LENGTH_LONG).show()
@@ -55,17 +52,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeProgressIndicator() {
-        baseViewModel.showProgressIndicator = MutableLiveData()
-        baseViewModel.showProgressIndicator.observeForever {
-            if (it) {
-                binding.progressIndicator.visibility = View.VISIBLE
-                println("\nobserveProgressIndicator -> shown\n\n")
-            } else {
-                binding.progressIndicator.visibility = View.GONE
-                println("\nobserveProgressIndicator -> hidden\n\n")
-            }
-        }
+    fun showProgressIndicator() {
+        binding.progressIndicator.visibility = VISIBLE
+    }
+
+    fun hideProgressIndicator() {
+        binding.progressIndicator.visibility = GONE
     }
 
     private fun toggleBottomNavigationBarVisibility(show: Boolean) {
