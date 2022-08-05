@@ -1,9 +1,17 @@
 package com.example.streamevent.model.dto
 
-open class Schedule(
-    val date: String = "",
-    val id: String = "",
-    val imageUrl: String = "",
-    val subtitle: String = "",
-    val title: String = ""
-)
+class Schedule : BaseResponse()
+
+fun toEvent(schedules: List<Schedule>): List<Event> {
+    val events: MutableList<Event> = mutableListOf()
+    schedules.forEach {
+        events.add(Event().apply {
+            this.date = it.date
+            this.id = it.id
+            this.imageUrl = it.imageUrl
+            this.subtitle = it.subtitle
+            this.title = it.title
+        })
+    }
+    return events
+}
