@@ -5,11 +5,11 @@
     android:id="@+id/event_card_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:elevation="8dp"
-    app:cardCornerRadius="8dp">
+    android:layout_marginStart="@dimen/default_margin"
+    android:layout_marginTop="@dimen/default_margin"
+    android:layout_marginEnd="@dimen/default_margin"
+    android:elevation="@dimen/default_margin"
+    app:cardCornerRadius="@dimen/default_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,11 +18,11 @@
 
         <ImageView
             android:id="@+id/eventThumbnail"
-            android:layout_width="180dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/image_view_width"
+            android:layout_height="@dimen/image_view_height"
+            android:contentDescription="@string/image_description_text"
             android:scaleType="centerCrop"
-            tools:src="@drawable/juvemufc"
-            android:contentDescription="@string/image_description_text" />
+            tools:src="@drawable/juvemufc" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,8 +34,8 @@
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="@dimen/default_margin"
+                android:paddingEnd="@dimen/default_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/eventSubTitle"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,8 +46,8 @@
                 style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="@dimen/default_margin"
+                android:paddingEnd="@dimen/default_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/eventTitle"
                 tools:text="Champions League" />
@@ -56,8 +56,8 @@
                 android:id="@+id/eventDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="@dimen/default_margin"
+                android:paddingEnd="@dimen/default_margin"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="Yesterday, 19:30" />
