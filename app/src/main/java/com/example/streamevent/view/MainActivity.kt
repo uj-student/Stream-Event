@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpNavigationBehaviour(navController: NavController) {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            println("hello3: ${binding.progressIndicator.isVisible}")
-
             when {
                 (item.itemId == R.id.eventsMenuItem) && (navController.currentDestination?.id != R.id.eventFragment) -> {
                     Toast.makeText(baseContext, "Events!!", Toast.LENGTH_LONG).show()

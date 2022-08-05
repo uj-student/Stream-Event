@@ -37,7 +37,6 @@ class ScheduleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpUI()
         getScheduleAndObserver()
-
     }
 
     //ToDo: look at duplicate code with EventFragment
