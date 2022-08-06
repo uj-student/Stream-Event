@@ -57,16 +57,14 @@ class PlaybackFragment : Fragment() {
     }
 
     private fun initializePlayer() {
-        player = ExoPlayer.Builder(requireContext())
-            .build()
-            .also { exoPlayer ->
-                binding.eventVideo.player = exoPlayer
-                exoPlayer.setMediaSource(getMediaItem())
-                exoPlayer.playWhenReady = true
-                exoPlayer.seekTo(currentItem, playbackPosition)
-                exoPlayer.addListener(playbackStateListener)
-                exoPlayer.prepare()
-            }
+        player = ExoPlayer.Builder(requireContext()).build().also { exoPlayer ->
+            binding.eventVideo.player = exoPlayer
+            exoPlayer.setMediaSource(getMediaItem())
+            exoPlayer.playWhenReady = true
+            exoPlayer.seekTo(currentItem, playbackPosition)
+            exoPlayer.addListener(playbackStateListener)
+            exoPlayer.prepare()
+        }
     }
 
     private fun getMediaItem(): MediaSource = ProgressiveMediaSource.Factory(DefaultHttpDataSource.Factory()).createMediaSource(MediaItem.fromUri(eventDetails.videoUrl))
@@ -101,4 +99,3 @@ class PlaybackFragment : Fragment() {
         }
     }
 }
-

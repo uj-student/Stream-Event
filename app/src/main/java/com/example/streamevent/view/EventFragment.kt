@@ -26,14 +26,14 @@ class EventFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentEventBinding.inflate(inflater, container, false)
-        baseActivity.showProgressIndicator()
+        baseActivity.toggleProgressIndicatorVisibility(View.VISIBLE)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpUI()
-        getEventsAndObserver()
+        getEventsAndObserve()
     }
 
     private fun setUpUI() {
@@ -44,11 +44,11 @@ class EventFragment : Fragment() {
         }
     }
 
-    private fun getEventsAndObserver() {
+    private fun getEventsAndObserve() {
         eventsViewModel.getEvents()
         eventsViewModel.eventsLiveData.observe(viewLifecycleOwner) {
             (binding.eventRecyclerView.adapter as EventAdapter).setEventList(it)
-            baseActivity.hideProgressIndicator()
+            baseActivity.toggleProgressIndicatorVisibility(View.GONE)
         }
     }
 }

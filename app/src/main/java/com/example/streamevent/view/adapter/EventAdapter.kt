@@ -15,21 +15,18 @@ import javax.inject.Inject
 class EventAdapter @Inject constructor() : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
     private var eventDisplayItems: List<Event> = listOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(EventItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(EventItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-    override fun onBindViewHolder(holder: EventAdapter.ViewHolder, position: Int) {
-        with(eventDisplayItems[position]) {
-            holder.bind(this)
-            holder.itemView.setOnClickListener {
-                if (this.videoUrl.isNotEmpty()) {
-                    it.findNavController().navigate(EventFragmentDirections.actionEventFragmentToPlaybackFragment(this))
-                }
+    override fun onBindViewHolder(holder: EventAdapter.ViewHolder, position: Int) = with(eventDisplayItems[position]) {
+        holder.bind(this)
+        holder.itemView.setOnClickListener {
+            if (this.videoUrl.isNotEmpty()) {
+                it.findNavController().navigate(EventFragmentDirections.actionEventFragmentToPlaybackFragment(this))
             }
         }
     }
 
-    override fun getItemCount() = eventDisplayItems.size
+    override fun getItemCount(): Int = eventDisplayItems.size
 
     fun setEventList(eventList: List<Event>) {
         val diffUtil = EventDiffUtil(this.eventDisplayItems, eventList)
@@ -39,13 +36,11 @@ class EventAdapter @Inject constructor() : RecyclerView.Adapter<EventAdapter.Vie
     }
 
     inner class ViewHolder(private val binding: EventItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(eventItem: Event) {
-            with(binding) {
-                eventTitle.text = eventItem.title
-                eventSubTitle.text = eventItem.subtitle
-                eventDateTime.text = eventItem.date.formatDate()
-                eventThumbnail.loadImage(eventItem.imageUrl)
-            }
+        fun bind(eventItem: Event) = with(binding) {
+            eventTitle.text = eventItem.title
+            eventSubTitle.text = eventItem.subtitle
+            eventDateTime.text = eventItem.date.formatDate()
+            eventThumbnail.loadImage(eventItem.imageUrl)
         }
     }
 }

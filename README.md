@@ -10,6 +10,7 @@ Using the following stack:
 
 For app functionality please [document here](./Android_Assessment.pdf)
 
+- app icon credit source: [Live streaming icons created by Flat Icons - Flaticon](https://www.flaticon.com/free-icons/live-streaming)
 
 
 ## Preview of App
