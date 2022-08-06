@@ -69,14 +69,18 @@ class ScheduleFragment : Fragment() {
     private fun getScheduleAndObserve() {
         scheduleViewModel.getSchedule()
         scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) {
-            with(binding.scheduleRecyclerView) {
-                itemAnimator = null
-                (adapter as EventAdapter).setEventList(toEvent(it))
+            if (it.isNotEmpty()) {
+                with(binding.scheduleRecyclerView) {
+                    itemAnimator = null
+                    (adapter as EventAdapter).setEventList(toEvent(it))
+                }
+                baseActivity.toggleErrorMessageVisibility(View.GONE)
             }
             baseActivity.toggleProgressIndicatorVisibility(View.GONE)
         }
     }
 
+    // this assumption is the list should be refreshed when user on the screen
     private fun getCountDownTimer(): CountDownTimer {
         return if (::countDownTimer.isInitialized) {
             countDownTimer
