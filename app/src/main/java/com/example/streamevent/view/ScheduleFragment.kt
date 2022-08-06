@@ -69,7 +69,10 @@ class ScheduleFragment : Fragment() {
     private fun getScheduleAndObserve() {
         scheduleViewModel.getSchedule()
         scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) {
-            (binding.scheduleRecyclerView.adapter as EventAdapter).setEventList(toEvent(it))
+            with(binding.scheduleRecyclerView) {
+                itemAnimator = null
+                (adapter as EventAdapter).setEventList(toEvent(it))
+            }
             baseActivity.toggleProgressIndicatorVisibility(View.GONE)
         }
     }
