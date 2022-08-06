@@ -1,5 +1,5 @@
 package com.example.streamevent.model.dto
 
-class Event(
-    val videoUrl: String = ""
-) : Schedule()
+import java.io.Serializable
+
+class Event(val videoUrl: String = "") : BaseResponse(), Serializable

@@ -10,14 +10,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EventsViewModel @Inject constructor(private val repository: Repository): ViewModel() {
+class EventsViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     val eventsLiveData = MutableLiveData<List<Event>>()
-    val showProgressIndicator = MutableLiveData<Boolean>(true)
 
-    init {
-        viewModelScope.launch {
-            eventsLiveData.postValue(repository.getEvents())
-            showProgressIndicator.postValue(false)
-        }
-    }
+    fun getEvents() = viewModelScope.launch { eventsLiveData.postValue(repository.getEvents().sortedBy { it.date }) }
 }

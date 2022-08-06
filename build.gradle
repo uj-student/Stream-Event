@@ -6,6 +6,8 @@ buildscript {
     ext.espresso_core_version = '3.4.0'
     ext.navigation_version = '2.5.1'
     ext.glide_version = '4.13.2'
+    ext.media_version = '1.0.0-beta02'
+    ext.exoplayer_version = '2.18.1'
 
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.38.1'

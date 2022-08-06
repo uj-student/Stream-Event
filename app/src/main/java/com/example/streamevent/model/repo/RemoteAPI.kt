@@ -5,7 +5,6 @@ import com.example.streamevent.model.dto.Schedule
 import retrofit2.http.GET
 
 interface RemoteAPI {
-
     @GET("/getEvents")
     suspend fun getEvents(): List<Event>
 
