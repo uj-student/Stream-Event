@@ -47,7 +47,12 @@ class EventFragment : Fragment() {
     private fun getEventsAndObserve() {
         eventsViewModel.getEvents()
         eventsViewModel.eventsLiveData.observe(viewLifecycleOwner) {
-            (binding.eventRecyclerView.adapter as EventAdapter).setEventList(it)
+            if (it.isEmpty()) {
+                baseActivity.toggleErrorMessageVisibility(View.VISIBLE)
+            } else {
+                (binding.eventRecyclerView.adapter as EventAdapter).setEventList(it)
+                baseActivity.toggleErrorMessageVisibility(View.GONE)
+            }
             baseActivity.toggleProgressIndicatorVisibility(View.GONE)
         }
     }
