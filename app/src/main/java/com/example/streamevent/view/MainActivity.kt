@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
@@ -54,5 +55,9 @@ class MainActivity : AppCompatActivity() {
 
     fun toggleProgressIndicatorVisibility(visibility: Int) {
         binding.progressIndicator.visibility = visibility
+    }
+
+    fun toggleErrorMessageVisibility(visibility: Int) {
+        binding.errorMessage.visibility = visibility
     }
 }

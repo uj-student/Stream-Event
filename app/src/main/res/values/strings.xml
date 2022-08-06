@@ -5,4 +5,5 @@
     <string name="image_description_text">Thumbnail to be displayed here</string>
     <string name="events_message">Events Loading!!</string>
     <string name="schedule_message">Schedule Loading!!</string>
+    <string name="error_message">Error loading data!\nPlease check internet connection or try again later.\n😥</string>
 </resources>
