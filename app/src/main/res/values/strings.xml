@@ -3,4 +3,6 @@
     <string name="events_title">Events</string>
     <string name="schedule_title">Schedule</string>
     <string name="image_description_text">Thumbnail to be displayed here</string>
+    <string name="events_message">Events Loading!!</string>
+    <string name="schedule_message">Schedule Loading!!</string>
 </resources>

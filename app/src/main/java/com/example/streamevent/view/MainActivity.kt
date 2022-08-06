@@ -1,8 +1,6 @@
 package com.example.streamevent.view
 
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -28,12 +26,12 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when {
                 (item.itemId == R.id.eventsMenuItem) && (navController.currentDestination?.id != R.id.eventFragment) -> {
-                    Toast.makeText(baseContext, "Events!!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(baseContext, getString(R.string.events_message), Toast.LENGTH_LONG).show()
                     navController.navigate(ScheduleFragmentDirections.actionScheduleFragmentToEventFragment())
                     true
                 }
                 (item.itemId == R.id.scheduleMenuItem) && (navController.currentDestination?.id != R.id.scheduleFragment) -> {
-                    Toast.makeText(baseContext, "Schedule!!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(baseContext, getString(R.string.schedule_message), Toast.LENGTH_LONG).show()
                     navController.navigate(EventFragmentDirections.actionEventFragmentToScheduleFragment())
                     true
                 }
@@ -50,15 +48,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showProgressIndicator() {
-        binding.progressIndicator.visibility = VISIBLE
-    }
-
-    fun hideProgressIndicator() {
-        binding.progressIndicator.visibility = GONE
-    }
-
     private fun toggleBottomNavigationBarVisibility(show: Boolean) {
         binding.bottomNavigationView.isVisible = show
+    }
+
+    fun toggleProgressIndicatorVisibility(visibility: Int) {
+        binding.progressIndicator.visibility = visibility
     }
 }

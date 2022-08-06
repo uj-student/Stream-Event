@@ -29,14 +29,14 @@ class ScheduleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
-        baseActivity.showProgressIndicator()
+        baseActivity.toggleProgressIndicatorVisibility(View.VISIBLE)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpUI()
-        getScheduleAndObserver()
+        getScheduleAndObserve()
     }
 
     //ToDo: look at duplicate code with EventFragment
@@ -49,11 +49,11 @@ class ScheduleFragment : Fragment() {
         }
     }
 
-    private fun getScheduleAndObserver() {
+    private fun getScheduleAndObserve() {
         scheduleViewModel.getSchedule()
         scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) {
             (binding.scheduleRecyclerView.adapter as EventAdapter).setEventList(toEvent(it))
-            baseActivity.hideProgressIndicator()
+            baseActivity.toggleProgressIndicatorVisibility(View.GONE)
         }
     }
 }

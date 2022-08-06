@@ -13,7 +13,5 @@ import javax.inject.Inject
 class ScheduleViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     val scheduleLiveData = MutableLiveData<List<Schedule>>()
 
-    fun getSchedule() = viewModelScope.launch {
-            scheduleLiveData.postValue(repository.getSchedule().sortedBy { it.date })
-        }
+    fun getSchedule() = viewModelScope.launch { scheduleLiveData.postValue(repository.getSchedule().sortedBy { it.date }) }
 }
