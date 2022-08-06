@@ -80,7 +80,7 @@ class ScheduleFragment : Fragment() {
         }
     }
 
-    // this assumption is the list should be refreshed when user on the screen
+    // this assumes that the list should be refreshed when the user is on the screen
     private fun getCountDownTimer(): CountDownTimer {
         return if (::countDownTimer.isInitialized) {
             countDownTimer
