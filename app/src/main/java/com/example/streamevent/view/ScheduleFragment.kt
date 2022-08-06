@@ -2,6 +2,7 @@ package com.example.streamevent.view
 
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,11 @@ class ScheduleFragment : Fragment() {
     private lateinit var binding: FragmentScheduleBinding
     private lateinit var baseActivity: MainActivity
     private val scheduleViewModel: ScheduleViewModel by viewModels()
+    private lateinit var countDownTimer: CountDownTimer
+
+    companion object {
+        private const val REFRESH_COUNTDOWN_INTERVAL = 30000L
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,6 +45,17 @@ class ScheduleFragment : Fragment() {
         getScheduleAndObserve()
     }
 
+    override fun onResume() {
+        super.onResume()
+        countDownTimer = getCountDownTimer()
+        countDownTimer.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+    }
+
     //ToDo: look at duplicate code with EventFragment
     private fun setUpUI() {
         binding.scheduleRecyclerView.apply {
@@ -54,6 +71,21 @@ class ScheduleFragment : Fragment() {
         scheduleViewModel.scheduleLiveData.observe(viewLifecycleOwner) {
             (binding.scheduleRecyclerView.adapter as EventAdapter).setEventList(toEvent(it))
             baseActivity.toggleProgressIndicatorVisibility(View.GONE)
+        }
+    }
+
+    private fun getCountDownTimer(): CountDownTimer {
+        return if (::countDownTimer.isInitialized) {
+            countDownTimer
+        } else {
+            object : CountDownTimer(REFRESH_COUNTDOWN_INTERVAL, REFRESH_COUNTDOWN_INTERVAL) {
+                override fun onTick(millisUntilFinished: Long) {}
+
+                override fun onFinish() {
+                    getScheduleAndObserve()
+                    countDownTimer.start()
+                }
+            }
         }
     }
 }
