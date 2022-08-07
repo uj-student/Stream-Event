@@ -1,6 +1,7 @@
 package com.example.streamevent.util
 
 import com.ibm.icu.text.RuleBasedNumberFormat
+import org.jetbrains.annotations.TestOnly
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.DAY_OF_MONTH
@@ -30,7 +31,7 @@ fun Date.isCurrentMonth(): Boolean = (Calendar.getInstance().get(Calendar.MONTH)
 
 fun Date.isToday(): Boolean = Calendar.getInstance().get(DAY_OF_MONTH).toString() == this.day().trimStart { it == '0' }
 
-fun Date.isOneDayDifference(): Boolean = getNumberOfDays(this) == 1
+fun Date.isOneDayDifference(): Boolean = this.isCurrentMonth() && getNumberOfDays(this) == 1
 
 fun Date.isYesterday(): Boolean = Calendar.getInstance().get(DAY_OF_MONTH) > this.day().trimStart { it == '0' }.toInt()
 
@@ -52,10 +53,13 @@ fun getDayName(date: Date): String {
             }
         }
     }
-    return if (getNumberOfDays(date) < 6) getDurationTillFunction(date) else date.getDisplayDate()
+    return if (getNumberOfDays(date) < 6 && date.isCurrentMonth()) getDurationTillFunction(date) else date.getDisplayDate()
 }
 
-//assumption is day difference is greater than 1
+//assumption is day difference is greater than 1 due to line 47
 fun getDurationTillFunction(date: Date): String = "In ${convertIntoWords(getNumberOfDays(date).toDouble())} days"
 
-private fun convertIntoWords(number: Double): String? = RuleBasedNumberFormat(Locale.getDefault(), RuleBasedNumberFormat.SPELLOUT).format(number)
+fun convertIntoWords(number: Double): String? = RuleBasedNumberFormat(Locale.getDefault(), RuleBasedNumberFormat.SPELLOUT).format(number)
+
+@TestOnly
+fun getDatePattern() = datePattern

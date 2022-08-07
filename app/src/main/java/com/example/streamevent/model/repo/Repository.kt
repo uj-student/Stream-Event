@@ -5,7 +5,7 @@ import com.example.streamevent.model.dto.Event
 import com.example.streamevent.model.dto.Schedule
 import javax.inject.Inject
 
-class Repository @Inject constructor(private val remoteAPI: RemoteAPI) {
+open class Repository @Inject constructor(private val remoteAPI: RemoteAPI) {
     suspend fun getEvents(): List<Event> = try {
         remoteAPI.getEvents()
     } catch (e: Exception) {

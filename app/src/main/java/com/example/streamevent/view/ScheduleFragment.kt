@@ -51,6 +51,8 @@ class ScheduleFragment : Fragment() {
         countDownTimer.start()
     }
 
+    // if the user puts app in background (onPause) whilst on this screen then count down continues
+    // and list is still refreshed
     override fun onStop() {
         super.onStop()
         countDownTimer.cancel()
