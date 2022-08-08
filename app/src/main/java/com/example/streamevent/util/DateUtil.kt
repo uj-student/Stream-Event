@@ -12,6 +12,7 @@ private const val yearPattern = "yyyy"
 private const val monthPattern = "MM"
 private const val dayPattern = "dd"
 private const val timePattern = "kk:mm" //24 hour
+private const val numberInWordsCap = 6 // library taps out at 15 => fifteen
 
 fun String.formatDate(): String = with(SimpleDateFormat(datePattern, Locale.getDefault()).parse(this) ?: Date()) {
     "${getDayName(this)}, ${this.time()}"
@@ -53,7 +54,7 @@ fun getDayName(date: Date): String {
             }
         }
     }
-    return if (getNumberOfDays(date) < 6 && date.isCurrentMonth()) getDurationTillFunction(date) else date.getDisplayDate()
+    return if (getNumberOfDays(date) < numberInWordsCap && date.isCurrentMonth()) getDurationTillFunction(date) else date.getDisplayDate()
 }
 
 //assumption is day difference is greater than 1 due to line 47
