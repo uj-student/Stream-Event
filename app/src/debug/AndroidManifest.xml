@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.streamevent">
 
-    <application
-        android:icon="@mipmap/ic_app_icon"
-        >
+    <application android:icon="@mipmap/ic_app_icon">
         <activity
             android:name=".HiltTestActivity"
             android:exported="false" />
