@@ -9,14 +9,15 @@ class Repository @Inject constructor(private val remoteAPI: RemoteAPI) {
     suspend fun getEvents(): List<Event> = try {
         remoteAPI.getEvents()
     } catch (e: Exception) {
+        println("Events repo -> "+ e.stackTraceToString())
         Log.e("Events repo -> ", e.stackTraceToString())
-        listOf()
+        emptyList()
     }
 
     suspend fun getSchedule(): List<Schedule> = try {
         remoteAPI.getSchedule()
     } catch (e: Exception) {
         Log.e("Schedule repo -> ", e.stackTraceToString())
-        listOf()
+        emptyList()
     }
 }
