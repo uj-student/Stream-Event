@@ -2,7 +2,6 @@
 buildscript {
     ext.hilt_version = '2.38.1'
     ext.retrofit_version = '2.9.0'
-    ext.http_logging_version = '4.9.0'
     ext.espresso_core_version = '3.4.0'
     ext.navigation_version = '2.5.1'
     ext.glide_version = '4.13.2'
