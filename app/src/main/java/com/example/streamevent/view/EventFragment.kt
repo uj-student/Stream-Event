@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,9 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class EventFragment : Fragment() {
-    private lateinit var binding: FragmentEventBinding
-    private lateinit var baseActivity: MainActivity
-    private val eventsViewModel: EventsViewModel by viewModels()
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    lateinit var binding: FragmentEventBinding
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    lateinit var baseActivity: MainActivity
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    val eventsViewModel: EventsViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

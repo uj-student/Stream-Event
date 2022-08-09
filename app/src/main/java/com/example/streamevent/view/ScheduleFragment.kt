@@ -21,8 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class ScheduleFragment : Fragment() {
     private lateinit var binding: FragmentScheduleBinding
     private lateinit var baseActivity: MainActivity
-    private val scheduleViewModel: ScheduleViewModel by viewModels()
     private lateinit var countDownTimer: CountDownTimer
+
+    private val scheduleViewModel: ScheduleViewModel by viewModels()
 
     companion object {
         private const val REFRESH_COUNTDOWN_INTERVAL = 30000L

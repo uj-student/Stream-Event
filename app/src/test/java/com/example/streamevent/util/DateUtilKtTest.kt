@@ -5,7 +5,6 @@ import org.junit.Test
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.DATE
-import kotlin.math.absoluteValue
 
 class DateUtilShould {
 
@@ -24,7 +23,6 @@ class DateUtilShould {
 
     @Test
     fun getNumberOfDays() {
-        println((-137).absoluteValue)
         assertEquals(1, getNumberOfDays(tomorrowDateSample))
         assertEquals(0, getNumberOfDays(todayDateSample))
         assertEquals(1, getNumberOfDays(yesterdayDateSample))

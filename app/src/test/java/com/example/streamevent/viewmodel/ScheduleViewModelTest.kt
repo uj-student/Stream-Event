@@ -16,6 +16,7 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import org.junit.jupiter.api.DisplayName
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -44,6 +45,7 @@ class ScheduleViewModelTest : BaseUnitTest() {
     }
 
     @Test
+    @DisplayName("Should verify that repository is called")
     fun shouldCallScheduleRepository() = runTest {
         `when`(repository.getSchedule()).thenReturn(emptyList())
 
@@ -54,6 +56,7 @@ class ScheduleViewModelTest : BaseUnitTest() {
     }
 
     @Test
+    @DisplayName("Should assert that correct response is received")
     fun getSchedule() = runTest {
         `when`(repository.getSchedule()).thenReturn(scheduleResponse)
 
