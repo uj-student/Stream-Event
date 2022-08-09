@@ -21,8 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class ScheduleFragment : Fragment() {
     private lateinit var binding: FragmentScheduleBinding
     private lateinit var baseActivity: MainActivity
-    private val scheduleViewModel: ScheduleViewModel by viewModels()
     private lateinit var countDownTimer: CountDownTimer
+
+    private val scheduleViewModel: ScheduleViewModel by viewModels()
 
     companion object {
         private const val REFRESH_COUNTDOWN_INTERVAL = 30000L
@@ -51,6 +52,8 @@ class ScheduleFragment : Fragment() {
         countDownTimer.start()
     }
 
+    // if the user puts app in background (onPause) whilst on this screen then count down continues
+    // and list is still refreshed
     override fun onStop() {
         super.onStop()
         countDownTimer.cancel()
